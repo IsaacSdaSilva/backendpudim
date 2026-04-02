@@ -28,7 +28,7 @@
             // Insere a venda na tabela da página
            
             // Salva a venda no localStorage para persistência
-                fetch("https://backend-pudim.onrender.com", { 
+                fetch("https://backend-pudim.onrender.com/vendas", { 
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -77,7 +77,7 @@
         let novoStatus = botaoStatus.innerText === "Pendente" ? "Pago" : "Pendente";
         botaoStatus.innerText = novoStatus;
 
-        fetch(`https://backend-pudim.onrender.com${id}`, {
+        fetch(`https://backend-pudim.onrender.com/vendas${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -94,7 +94,7 @@
     botaoRemover.innerText = "Remover";
 
     botaoRemover.onclick = function () {
-        fetch(`https://backend-pudim.onrender.com${id}`, {
+        fetch(`https://backend-pudim.onrender.com/vendas${id}`, {
             method: "DELETE"
         }).then(() => {
             carregarVendas();
@@ -194,7 +194,7 @@
         }
 
         function carregarVendas() {
-            fetch("https://backend-pudim.onrender.com")
+            fetch("https://backend-pudim.onrender.com/vendas")
             .then(res=> res.json())
             .then(vendas => {
                 let tabela = document.getElementById("tabela");
