@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabor & Rumo</title>
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+<a href="https://wa.me/555199086509" class="whatsapp-fixo" target="_blank">
+    💬
+</a>
+<body>
+    <header class="site-header">
+        <div class="logo">
+            <img src="img/logo-1.png" alt="Logo Sabor & Rumo">
+        </div>
+        <div class="hero-text">
+            <h1>Sabor & Rumo 🍮</h1>
+            <p class="sub">Sabor de uma memória que abraça ❤️</p>
+            <p class="sub">Cada pedido é um passo ao nosso sonho ❤️</p>
+        </div>
+        <section class="bio">
+            <img src="img/casal.jpg" alt="Casal Sabor & Rumo">
+            <div>
+                <h2>Quem somos</h2>
+                <p>O Sabor & Rumo nasceu de um sonho construído a dois, com coragem, propósito e muito amor envolvido. 🌍🍮❤️</p>
+            </div>
+        </section>
+        <div class="aviso">
+            ⏳ Produção artesanal sob encomenda <br>
+🍮 Feito fresco especialmente pra você <br>
+📅 Prazo de até 2 dias
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="customer">
+            <label for="nomeCliente">Nome do cliente</label>
+            <input type="text" id="nomeCliente" placeholder="Seu nome">
+        </section>
+
+        <section class="products" aria-label="Produtos disponíveis">
+            <article class="card">
+                <img src="img/pudim-p.jpg" alt="Pudim P">
+                <h2>Pudim P</h2>
+                <p class="weight">100g</p>
+                <p>Delicioso pudim de leite cremoso, ideal para matar aquela vontade de doce no dia a dia.</p>
+                <span class="price">R$ 10,00</span>
+                <label for="quantidadeP">Quantidade</label>
+                <input type="number" id="quantidadeP" value="1" min="1">
+                <button onclick="pedir('Pudim P', 'quantidadeP')">Pedir</button>
+            </article>
+
+            <article class="card">
+                <img src="img/pudim-m.jpg" alt="Pudim M">
+                <h2>Pudim M</h2>
+                <p class="weight">500g</p>
+                <p>O clássico pudim de leite, perfeito para compartilhar (ou não 😅) momentos doces com quem você ama.</p>
+                <span class="price">R$ 30,00</span>
+                <label for="quantidadeM">Quantidade</label>
+                <input type="number" id="quantidadeM" value="1" min="1">
+                <button onclick="pedir('Pudim M', 'quantidadeM')">Pedir</button>
+            </article>
+
+            <article class="card">
+                <img src="img/pudim-g.jpg" alt="Pudim G">
+                <h2>Pudim G</h2>
+                <p class="weight">1kg</p>
+                <p>O pudim dos sonhos, para aqueles momentos em que só o melhor é suficiente. Ideal para festas e celebrações.</p>
+                <span class="price">R$ 55,00</span>
+                <label for="quantidadeG">Quantidade</label>
+                <input type="number" id="quantidadeG" value="1" min="1">
+                <button onclick="pedir('Pudim G', 'quantidadeG')">Pedir</button>
+            </article>
+        </section>
+
+        
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
