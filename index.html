@@ -1,0 +1,68 @@
+<div class="container">
+    <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Vendas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Cabeçalho do sistema de controle de vendas -->
+    <h1>Controle de Vendas</h1>
+    <div class="form">
+    <!-- Campo para digitar o nome do cliente -->
+    <input type="text" id="cliente" placeholder="Digite o nome do cliente">
+    <!-- Seleção do produto vendido -->
+    <select id="produto">
+        <option value="Pudim P">Pudim P (R$ 10,00)</option>
+        <option value="Pudim M">Pudim M (R$ 30,00)</option>
+        <option value="Pudim G">Pudim G (R$ 55,00)</option>
+    </select>
+    <!-- Quantidade do produto -->
+    <input type="number" id="quantidade" placeholder="Quantidade" min="1" value="1">
+    <select id="pagamento">
+        <option value="dinheiro">Dinheiro</option>
+        <option value="pix">Pix</option>
+    </select>
+    <select id="status">
+        <option value="pendente">Pendente</option>
+        <option value="pago">Pago</option>
+    </select>
+    <!-- Botão para adicionar a venda -->
+    <button onclick="teste()">Adicionar</button>
+    </div>
+    <button onclick="zerarSistema()">Zerar Tudo</button>
+    <button onclick="filtrarPendentes()"> Ver Pendentes</button>
+    <!-- Exibição do total faturado -->
+    <h2> Total Faturado: R$ <span id="total">0.00</span></h2>
+    <p>💰 Recebido: R$ <span id="recebido">0.00</span></p>
+    <p>⏳ Pendente: R$ <span id="pendente">0.00</span></p>
+    <!-- Tabela de vendas adicionadas -->
+    <table border="1">
+        <tr>
+            <th>Cliente</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+            <th>Ação</th>
+            <th>Pagamento</th>
+            <th>Status</th>
+        </tr>
+        <tbody id="tabela"></tbody>
+    </table>
+    <!-- Relatório de vendas por produto e faturamento -->
+    <div class="relatorio">
+    <h2>Relatório</h2>
+    <p>Pudim P Vendidos: <span id="pudim-p">0</span></p>
+    <p>Pudim M Vendidos: <span id="pudim-m">0</span></p>
+    <p>Pudim G Vendidos: <span id="pudim-g">0</span></p>
+    <p>Faturamento Pudim P: R$ <span id="faturamento-p">0</span></p>
+    <p>Faturamento Pudim M: R$ <span id="faturamento-m">0</span></p>
+    <p>Faturamento Pudim G: R$ <span id="faturamento-g">0</span></p>
+    </div>
+    <h2>Vendas de Hoje</h2>
+    <p>Total Hoje: R$ <span id="total-hoje">0</span></p>
+    <script src="script.js"></script>
+</body>
+</html>
+</div>
