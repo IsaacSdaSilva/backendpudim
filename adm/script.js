@@ -1,15 +1,13 @@
+// Valor total de todas as vendas exibido na tela
+let total = 0;
+let vendas = [];
 
-        // Valor total de todas as vendas exibido na tela
-        let total = 0;
-
-        // Função chamada quando o botão "Adicionar" é clicado
-        function teste() {
+// Função chamada quando o botão "Adicionar" é clicado
+function teste() {
             let nome = document.getElementById("cliente").value.trim();
             let produto = document.getElementById("produto").value;
             let quantidade = parseInt(document.getElementById("quantidade").value, 10);
             let pagamento = document.getElementById("pagamento").value;
-            let status = document.getElementById("status").value;
-            let data = new Date().toLocaleDateString("pt-BR");
 
             // Validação dos campos antes de adicionar a venda
             if (nome === "" || quantidade <= 0 || isNaN(quantidade)) {
@@ -23,12 +21,9 @@
                         produto === "Pudim G" ? 55 : 0;
 
             let valor = preco * quantidade;
-            let id = Date.now();
 
-            // Insere a venda na tabela da página
-           
-            // Salva a venda no localStorage para persistência
-                fetch("https://backend-pudim.onrender.com/vendas", { 
+            // Salva a venda no backend
+            fetch("https://backend-pudim.onrender.com/vendas", { 
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -43,18 +38,12 @@
             })
             .then(() => {
                 carregarVendas();
-            });
-
-            // Atualiza o total exibido
-            total += valor;
-            document.getElementById("total").innerText = total.toFixed(2);
+            })
+            .catch(err => console.error("Erro ao adicionar venda:", err));
 
             // Limpa os campos após adicionar
             document.getElementById("cliente").value = "";
             document.getElementById("quantidade").value = 1;
-        
-        atualizarRelatorio();
-        calcularhoje();
         }
 
         // Função que cria uma linha na tabela para cada venda
@@ -66,10 +55,27 @@
     linha.insertCell(1).innerText = produto;
     linha.insertCell(2).innerText = quantidade;
     linha.insertCell(3).innerText = "R$ " + valor.toFixed(2);
-    linha.insertCell(4).innerText = pagamento;
+
+    // REMOVER (Ação)
+    let removerCell = linha.insertCell(4);
+    let botaoRemover = document.createElement("button");
+    botaoRemover.innerText = "Remover";
+
+    botaoRemover.onclick = function () {
+        fetch(`https://backend-pudim.onrender.com/vendas/${id}`, {
+            method: "DELETE"
+        }).then(() => {
+            carregarVendas();
+        });
+    };
+
+    removerCell.appendChild(botaoRemover);
+
+    // PAGAMENTO
+    linha.insertCell(5).innerText = pagamento;
 
     // STATUS
-    let statusCell = linha.insertCell(5);
+    let statusCell = linha.insertCell(6);
     let botaoStatus = document.createElement("button");
     botaoStatus.innerText = status || "Pendente";
 
@@ -77,7 +83,7 @@
         let novoStatus = botaoStatus.innerText === "Pendente" ? "Pago" : "Pendente";
         botaoStatus.innerText = novoStatus;
 
-        fetch(`https://backend-pudim.onrender.com/vendas${id}`, {
+        fetch(`https://backend-pudim.onrender.com/vendas/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -87,21 +93,6 @@
     };
 
     statusCell.appendChild(botaoStatus);
-
-    // REMOVER
-    let removerCell = linha.insertCell(6);
-    let botaoRemover = document.createElement("button");
-    botaoRemover.innerText = "Remover";
-
-    botaoRemover.onclick = function () {
-        fetch(`https://backend-pudim.onrender.com/vendas${id}`, {
-            method: "DELETE"
-        }).then(() => {
-            carregarVendas();
-        });
-    };
-
-    removerCell.appendChild(botaoRemover);
 }    
     
         function atualizarRelatorio() {
@@ -196,7 +187,8 @@
         function carregarVendas() {
             fetch("https://backend-pudim.onrender.com/vendas")
             .then(res=> res.json())
-            .then(vendas => {
+            .then(dados => {
+                vendas = dados;
                 let tabela = document.getElementById("tabela");
                 tabela.innerHTML = "";
 
@@ -216,9 +208,11 @@
                     total += venda.valor;
                 });
                 document.getElementById("total").innerText = total.toFixed(2);
-            });
+                atualizarRelatorio();
+                atualizarTotais();
+                calcularhoje();
+            })
+            .catch(err => console.error("Erro ao carregar vendas:", err));
         }
         // Carrega as vendas salvas quando a página é aberta
-        window.onload = function () {
-        carregarVendas();
-        };
+        window.addEventListener('load', carregarVendas);
