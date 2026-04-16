@@ -1,6 +1,7 @@
 {
   "name": "backend-pudim",
   "version": "1.0.0",
+  "description": "Server de vendas de pudim",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
